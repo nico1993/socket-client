@@ -13,7 +13,7 @@ export class ChatService {
   sendMessage(mensaje:string)
   {
     const data = {
-      de: 'Nicolás',
+      de: this._webSocket.getUsuario().nombre,
       mensaje
     };
 
@@ -23,5 +23,20 @@ export class ChatService {
   getMessages()
   {
     return this._webSocket.listen('mensaje-nuevo');
+  }
+
+  getPrivateMessages()
+  {
+    return this._webSocket.listen('mensaje-privado-nuevo');
+  }
+
+  getUsuariosActivos()
+  {
+    return this._webSocket.listen('usuarios-activos');
+  }
+
+  getUsuarios()
+  {
+    return this._webSocket.emit('obtener-usuarios');
   }
 }
